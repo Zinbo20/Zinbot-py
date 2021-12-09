@@ -2,7 +2,6 @@ import discord
 from discord.utils import get
 import os
 import random
-from keep_alive import keep_alive
 import asyncio
 
 loop = asyncio.get_event_loop()
