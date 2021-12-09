@@ -3,7 +3,6 @@ from discord.utils import get
 import os
 import random
 import asyncio
-
 loop = asyncio.get_event_loop()
 from discord import FFmpegPCMAudio, PCMVolumeTransformer
 import re
@@ -11,7 +10,6 @@ import urllib
 from youtube_dl import YoutubeDL
 
 import time
-import asyncio
 
 players = {}
 COR = 0xF7FE2E

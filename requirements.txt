@@ -6,3 +6,4 @@ simplejson
 youtube_dl
 pip
 discord.py
+PyNaCl
