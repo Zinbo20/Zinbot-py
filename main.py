@@ -1,4 +1,4 @@
-import discord
+python import discord
 from discord.utils import get
 import os
 import random
