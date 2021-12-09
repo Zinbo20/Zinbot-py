@@ -1,1 +1,1 @@
-Worker node ./main.py
+web: gunicorn dep:app
