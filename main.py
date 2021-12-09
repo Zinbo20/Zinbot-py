@@ -143,7 +143,6 @@ async def on_message(message):
         if voice == None:
             await canal.connect()
             canal_voice = message.author.voice.channel.id
-            #await message.channel.send(f"Joined **{canal}**")
             if (msg != yt_url and msg != yt_url2):
                 await asyncio.gather(embed_musica(message, yt_url))
             await asyncio.gather(play(message, yt_url))
@@ -169,7 +168,6 @@ async def embed_musica(message, yt_url):
         embed_music = discord.Embed(title=video_title,
         description='Playing ' + yt_url,
         colour=discord.Colour.green())
-        #embed_music.set_image(url=thumnail_url)
         embed_music.set_thumbnail(url=thumnail_url)
         await message.channel.send(embed=embed_music)
 
