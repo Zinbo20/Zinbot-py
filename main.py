@@ -5,7 +5,6 @@ import random
 import asyncio
 loop = asyncio.get_event_loop()
 from discord import FFmpegPCMAudio, PCMVolumeTransformer
-import ffmpeg
 import re
 import urllib
 from youtube_dl import YoutubeDL
