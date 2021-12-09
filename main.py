@@ -196,6 +196,7 @@ async def play(message, yt_url):
                 thumnail_url = "http://img.youtube.com/vi/%s/0.jpg" % video_id
                 URL = info['formats'][0]['url']
                 voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
+                
                 voice.is_playing()
 
     print("t = ", t)
