@@ -9,8 +9,6 @@ import re
 import urllib
 from youtube_dl import YoutubeDL
 
-import time
-
 players = {}
 COR = 0xF7FE2E
 
@@ -40,10 +38,8 @@ async def on_ready():
     await client.change_presence(activity=discord.Activity(
         type=discord.ActivityType.listening, name="*help"))
 
-
 @client.event
 async def on_message(message):
-    print('on_message')
 
     if message.content.startswith('*help'):
         embed_help = discord.Embed(colour=discord.Colour.blue())
@@ -195,8 +191,7 @@ async def play(message, yt_url):
                 video_id = info.get("id", None)
                 thumnail_url = "http://img.youtube.com/vi/%s/0.jpg" % video_id
                 URL = info['formats'][0]['url']
-                voice.play(discord.FFmpegPCMAudio(URL,executable = "C:/path/ffmpeg.exe", **FFMPEG_OPTIONS))
-                
+                voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
                 voice.is_playing()
 
     print("t = ", t)
@@ -231,11 +226,10 @@ async def queue(message,voice):
             with YoutubeDL(YDL_OPTIONS) as ydl:
                 info = ydl.extract_info(q[0], download=False)
                 URL = info['formats'][0]['url']
-                voice.play(discord.FFmpegPCMAudio(URL,executable = "C:/path/ffmpeg.exe", **FFMPEG_OPTIONS))
+                voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
                 t = info.get("duration", None)
                 queue_title = info.get('title', None)
                 voice.is_playing()
-
 
     if voice.is_playing() and i == 0:
         embed_queue = discord.Embed(
