@@ -194,10 +194,6 @@ async def play(message, yt_url):
                 voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
                 voice.is_playing()
 
-    print("t = ", t)
-    print("Queue is:", q)
-    print(len(q))
-
     if (len(q) >= 1):
         name.append(v_title)
 
@@ -216,11 +212,9 @@ async def play(message, yt_url):
 async def queue(message,voice):
     global q, t, name, i,queue_title
     if i <= t:
-        #print(i)
         i = i + 1
         await asyncio.sleep(1)
     else:
-        print(voice)  #,print(q) ,print(len(q)),print(t)
         if not voice.is_playing():
             i = 0
             with YoutubeDL(YDL_OPTIONS) as ydl:
@@ -239,7 +233,6 @@ async def queue(message,voice):
         await message.channel.send(embed=embed_queue)
         q.pop(0)
         name.pop(0)
-        #[queue_title](q[0])
 
     if voice.is_playing() or len(q) >= 1:
         await asyncio.gather(queue(message,voice))
