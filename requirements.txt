@@ -1,10 +1,5 @@
 requests
-pyquery==1.2.8
-asyncio
-Pymoe
-simplejson
 youtube_dl
-pip
+discord
 discord.py
 PyNaCl
-ffmpeg
