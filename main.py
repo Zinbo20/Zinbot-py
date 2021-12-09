@@ -196,7 +196,7 @@ async def play(message, yt_url):
                 video_id = info.get("id", None)
                 thumnail_url = "http://img.youtube.com/vi/%s/0.jpg" % video_id
                 URL = info['formats'][0]['url']
-                voice.play(discord.FFmpegPCMAudio(URL,executable = "ffmpeg\ffmpeg.exe", **FFMPEG_OPTIONS))
+                voice.play(discord.FFmpegPCMAudio(URL,executable = "C:/path/ffmpeg.exe", **FFMPEG_OPTIONS))
                 
                 voice.is_playing()
 
@@ -232,7 +232,7 @@ async def queue(message,voice):
             with YoutubeDL(YDL_OPTIONS) as ydl:
                 info = ydl.extract_info(q[0], download=False)
                 URL = info['formats'][0]['url']
-                voice.play(discord.FFmpegPCMAudio(URL,executable = "ffmpeg\ffmpeg.exe", **FFMPEG_OPTIONS))
+                voice.play(discord.FFmpegPCMAudio(URL,executable = "C:/path/ffmpeg.exe", **FFMPEG_OPTIONS))
                 t = info.get("duration", None)
                 queue_title = info.get('title', None)
                 voice.is_playing()
