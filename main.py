@@ -257,5 +257,4 @@ async def queue(message,voice):
         await message.channel.send(embed=embed_track)
 
 
-keep_alive()
 client.run(os.getenv('TOKEN'))
