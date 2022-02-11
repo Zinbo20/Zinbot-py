@@ -274,6 +274,8 @@ async def playlist(message, yt_url):
     global name, q
     count = 0
 
+    voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
+
     embed_loading = discord.Embed(description='Carregando Playlist...',
                                   colour=discord.Colour.blue())
     await message.channel.send(embed=embed_loading)
@@ -294,8 +296,6 @@ async def playlist(message, yt_url):
 
             q.append(video_url)
             name.append(video_title)
-
-            #print("web_url is:", video_url)
 
         except Exception:
           await asyncio.gather(embed_track(message, q[0]))
