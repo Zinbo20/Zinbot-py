@@ -392,12 +392,6 @@ async def queue(message,voice):
     global q, name, t, queue_bool
     queue_bool = 1
 
-    print(message)
-    print(voice)  #,print(q) ,print(len(q)),print(t)
-
-    print("t = ", t)
-    #await asyncio.sleep(t)
-
     while True:
       if voice.is_playing() or voice.is_paused():
         await asyncio.sleep(1)
