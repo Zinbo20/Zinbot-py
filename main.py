@@ -382,7 +382,7 @@ async def queue(message,voice):
     #replit\
     canal = message.author.voice.channel
 
-    voice = get(client.voice_clients, guild=message.channel.guild)
+    voice = discord.utils.get(client.voice_clients, guild=message.channel.guild)
 
     if voice == None:
       await canal.connect()
