@@ -2,7 +2,6 @@ import discord
 from discord.utils import get
 import os
 import random
-from keep_alive import keep_alive
 import asyncio
 from discord import FFmpegPCMAudio, PCMVolumeTransformer
 import re
