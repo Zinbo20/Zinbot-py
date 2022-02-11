@@ -300,17 +300,6 @@ async def playlist(message, yt_url):
         except Exception:
           await asyncio.gather(embed_track(message, q[0]))
 
-          #replit\
-          canal = message.author.voice.channel
-
-          voice = get(client.voice_clients, guild=message.channel.guild)
-
-          if voice == None:
-            await canal.connect()
-
-            voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
-          #replit/
-
           if queue_bool == 0:
             await asyncio.gather(queue(message, voice))
 
@@ -389,6 +378,17 @@ async def play(message, yt_url):
 async def queue(message,voice):
     global q, name, t, queue_bool
     queue_bool = 1
+
+    #replit\
+    canal = message.author.voice.channel
+
+    voice = get(client.voice_clients, guild=message.channel.guild)
+
+    if voice == None:
+      await canal.connect()
+
+      voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
+    #replit/
 
     while True:
       if voice.is_playing() or voice.is_paused():
