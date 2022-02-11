@@ -47,7 +47,7 @@ async def on_reaction_add(reaction,user):
 
   if msg != None:
     await asyncio.sleep(1)
-    if(reaction.message.id == msg.id and user.name != "Shiro 2.0"):
+    if(reaction.message.id == msg.id and user.name != client.user.name):
 
       if reaction.emoji == '⏮':
         i = 1
@@ -145,8 +145,6 @@ async def on_message(message):
         x += 1
 
       pag = len(name)/10
-      print(pag)
-      print(int(pag))
       if(pag > int(pag)):
         pag = int(pag)+1
 
