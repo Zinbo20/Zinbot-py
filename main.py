@@ -92,7 +92,7 @@ async def on_message(message):
             '*play*, *leave*, *clear*, *list*, *skip*, *stop*, *resume*, *pause*.',
             inline=False)
     embed_help.add_field(name='Specific commands',
-                             value='*blitzcrank*, *shiro*.',
+                             value='*blitzcrank*, *zinbot*.',
                              inline=False)
 
     await message.channel.send(embed=embed_help)
