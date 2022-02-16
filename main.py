@@ -147,6 +147,8 @@ async def on_message(message):
       pag = len(name)/10
       if(pag > int(pag)):
         pag = int(pag)+1
+      elif (pag == int(pag)):
+        pag = int(pag)-1
 
       page = discord.Embed (
         title = 'Page '+str(i)+'/'+str(pag),
