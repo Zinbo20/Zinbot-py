@@ -189,12 +189,10 @@ async def on_message(message):
 
   elif message.content.startswith(Chave + 'start'):
     global queue_bool
-    await message.guild.voice_client.disconnect()######
     canal = message.author.voice.channel
     await canal.connect()
     voice = get(client.voice_clients, guild=message.channel.guild)
-    if queue_bool == 0:
-      await asyncio.gather(queue(message, voice))
+    await asyncio.gather(queue(message, voice))
 
   elif message.content.startswith(Chave + 'ping'):
     ping = client.latency * 1000
@@ -418,7 +416,7 @@ async def queue(message,voice):
 async def timeout(message, voice):
     await asyncio.sleep(t)
     await asyncio.sleep(3 * 60)
-    while voice.is_playing() or voice.is_paused():
+    while voice.is_playing() or voice.is_paused() or voice == None:
         break
     else:
         embed_track = discord.Embed(
