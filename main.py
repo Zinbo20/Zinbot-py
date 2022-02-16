@@ -189,6 +189,7 @@ async def on_message(message):
 
   elif message.content.startswith(Chave + 'start'):
     global queue_bool
+    await message.guild.voice_client.disconnect()######
     canal = message.author.voice.channel
     await canal.connect()
     voice = get(client.voice_clients, guild=message.channel.guild)
@@ -288,14 +289,12 @@ async def playlist(message, yt_url):
           while video != 0:
             video = info['entries'][count]
             video_url = video['webpage_url']
-
-            info_dict = ydl.extract_info(video_url, download=False)
-            video_title = info_dict.get('title', None)
-
-            count = count + 1
+            video_title = video['title']
 
             q.append(video_url)
             name.append(video_title)
+
+            count = count + 1
 
         except Exception:
           await asyncio.gather(embed_track(message, q[0]))
@@ -378,17 +377,6 @@ async def play(message, yt_url):
 async def queue(message,voice):
     global q, name, t, queue_bool
     queue_bool = 1
-
-    #replit\
-    canal = message.author.voice.channel
-
-    voice = discord.utils.get(client.voice_clients, guild=message.channel.guild)
-
-    if voice == None:
-      await canal.connect()
-
-      voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
-    #replit/
 
     while True:
       if voice.is_playing() or voice.is_paused():
