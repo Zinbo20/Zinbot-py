@@ -217,17 +217,18 @@ async def on_message(message):
     attachment = str(message.content)
     search = ""
 
-    x = 1
-    while True:
+    if(len(attachment.split()) > 1):
+      x = 1
+      while True:
         msg = attachment.split()[x]
         search += msg + " "
         x = x + 1
         if x == len(attachment.split()):
             break
 
-    msg = attachment.split()[1]
+      msg = attachment.split()[1]
 
-    if not msg.startswith('https://'):
+      if not msg.startswith('https://'):
 
         search = search.replace(" ", "+")
 
@@ -237,14 +238,14 @@ async def on_message(message):
 
         yt_url = "https://www.youtube.com/watch?v=" + video_ids[0]
 
-    else:
+      else:
         yt_url = attachment.split()[1]
 
-    canal = message.author.voice.channel
+      canal = message.author.voice.channel
 
-    voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
+      voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
 
-    if voice == None:
+      if voice == None:
         await canal.connect()
         canal_voice = message.author.voice.channel.id
 
@@ -257,7 +258,7 @@ async def on_message(message):
             await asyncio.gather(play(message, yt_url))
         else:
             await asyncio.gather(playlist(message, yt_url))
-    else:
+      else:
         canal_voice2 = message.author.voice.channel.id
         if canal_voice == canal_voice2:
             if not msg.startswith('https://') and not voice.is_playing():
@@ -269,6 +270,24 @@ async def on_message(message):
         else:
             await message.channel.send(
                     "I'm already playing in other channel")
+
+    elif(len(attachment.split()) == 1):
+      if q:
+        if voice == None:
+          await canal.connect()
+          canal_voice = message.author.voice.channel.id
+
+          voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
+        if queue_bool == 0:
+          await asyncio.gather(queue(message, voice))
+        else:
+          embed_noq = discord.Embed(description='It is already playing',
+          colour=discord.Colour.red())
+          await message.channel.send(embed=embed_noq)
+      else:
+        embed_noq = discord.Embed(description='There is nothing to play',
+        colour=discord.Colour.red())
+        await message.channel.send(embed=embed_noq)
 
 
 async def playlist(message, yt_url):
