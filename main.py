@@ -403,6 +403,9 @@ async def queue(message,voice):
       else:
         break
 
+    await asyncio.sleep(1)
+    voice = get(client.voice_clients, guild=message.channel.guild)
+
     if q:
       try:
         with YoutubeDL(YDL_OPTIONS) as ydl:
@@ -431,12 +434,13 @@ async def queue(message,voice):
         t = 1
         await asyncio.gather(timeout(message, voice))
         queue_bool = 0
-    else:
+    elif  voice != None:
       await asyncio.gather(queue(message, voice))
 
 async def timeout(message, voice):
     await asyncio.sleep(t)
     await asyncio.sleep(3 * 60)
+    voice = get(client.voice_clients, guild=message.channel.guild)
     while voice.is_playing() or voice.is_paused() or voice == None:
         break
     else:
