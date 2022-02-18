@@ -173,7 +173,6 @@ async def on_message(message):
     voice = get(client.voice_clients, guild=message.channel.guild)
     t = 1
     voice.stop()
-    #await asyncio.gather(queue(message, voice))
 
   elif message.content.startswith(Chave + 'pause'):
     voice = get(client.voice_clients, guild=message.channel.guild)
@@ -201,6 +200,62 @@ async def on_message(message):
                                     str(int(ping)) + "ms",
                                     colour=000000)
     await message.channel.send(embed=embed_ping)
+
+
+  elif message.content.startswith(Chave + 'add'):
+    global canal_voice, canal_voice2
+    msg = ""
+    yt_url = ""
+
+    attachment = str(message.content)
+    search = ""
+
+    print("msg=")
+    print(len(attachment.split()))
+
+    if(len(attachment.split()) > 1):
+      x = 1
+      while True:
+        msg = attachment.split()[x]
+        search += msg + " "
+        x = x + 1
+        if x == len(attachment.split()):
+            break
+
+      msg = attachment.split()[1]
+
+      if not msg.startswith('https://'):
+
+        search = search.replace(" ", "+")
+
+        html = urllib.request.urlopen(
+                "https://www.youtube.com/results?search_query=" + search)
+        video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
+
+        yt_url = "https://www.youtube.com/watch?v=" + video_ids[0]
+
+      else:
+        yt_url = attachment.split()[1]
+
+      with YoutubeDL(YDL_OPTIONS) as ydl:
+        info = ydl.extract_info(yt_url, download=False)
+        v_title = info.get('title', None)
+
+      if not msg.startswith('https://'):
+
+        embed_queue = discord.Embed(title="Added Music " + v_title,
+        url=yt_url,
+        colour=000000)
+        await message.channel.send(embed=embed_queue)
+        q.append(yt_url)
+        name.append(v_title)
+
+      elif msg.startswith('https://youtube.com/playlist'):
+        await asyncio.gather(playlist(message, yt_url))
+
+      else:
+        q.append(yt_url)
+        name.append(v_title)
 
   elif message.content.startswith(Chave + 'play'):
     global canal_voice, canal_voice2
