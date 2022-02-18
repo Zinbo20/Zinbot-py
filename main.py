@@ -274,14 +274,14 @@ async def on_message(message):
     elif(len(attachment.split()) == 1):
       if q:
         voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
+
         if voice == None:
-          
+
           canal = message.author.voice.channel
           await canal.connect()
 
           voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
 
-        if queue_bool == 0:
           await asyncio.gather(queue(message, voice))
         else:
           embed_noq = discord.Embed(description='It is already playing',
