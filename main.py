@@ -275,10 +275,12 @@ async def on_message(message):
       if q:
         voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
         if voice == None:
-          await canal.connect()
+
           canal_voice = message.author.voice.channel.id
+          await canal.connect()
 
           voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
+          
         if queue_bool == 0:
           await asyncio.gather(queue(message, voice))
         else:
