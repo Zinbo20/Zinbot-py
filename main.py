@@ -273,6 +273,7 @@ async def on_message(message):
 
     elif(len(attachment.split()) == 1):
       if q:
+        voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
         if voice == None:
           await canal.connect()
           canal_voice = message.author.voice.channel.id
