@@ -173,7 +173,7 @@ async def on_message(message):
     voice = get(client.voice_clients, guild=message.channel.guild)
     t = 1
     voice.stop()
-    await asyncio.gather(queue(message, voice))
+    #await asyncio.gather(queue(message, voice))
 
   elif message.content.startswith(Chave + 'pause'):
     voice = get(client.voice_clients, guild=message.channel.guild)
@@ -188,13 +188,6 @@ async def on_message(message):
   elif message.content.startswith(Chave + 'stop'):
     voice = get(client.voice_clients, guild=message.channel.guild)
     voice.stop()
-
-  elif message.content.startswith(Chave + 'start'):
-    global queue_bool
-    canal = message.author.voice.channel
-    await canal.connect()
-    voice = get(client.voice_clients, guild=message.channel.guild)
-    await asyncio.gather(queue(message, voice))
 
   elif message.content.startswith(Chave + 'ping'):
     ping = client.latency * 1000
