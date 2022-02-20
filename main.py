@@ -305,7 +305,7 @@ async def on_message(message):
         if msg.startswith('https://youtube.com/playlist') or msg.startswith('https://www.youtube.com/playlist'):
           await asyncio.gather(playlist(message, yt_url))
         else:
-          wait asyncio.gather(play(message, yt_url))
+          await asyncio.gather(play(message, yt_url))
       else:
         canal_voice2 = message.author.voice.channel.id
         if canal_voice == canal_voice2:
