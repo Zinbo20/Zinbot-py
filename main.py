@@ -302,19 +302,19 @@ async def on_message(message):
 
         if not msg.startswith('https://') and not voice.is_playing():
             await asyncio.gather(embed_musica(message, yt_url))
-        if not msg.startswith('https://youtube.com/playlist'):
-            await asyncio.gather(play(message, yt_url))
+        if msg.startswith('https://youtube.com/playlist') or msg.startswith('https://www.youtube.com/playlist'):
+          await asyncio.gather(playlist(message, yt_url))
         else:
-            await asyncio.gather(playlist(message, yt_url))
+          wait asyncio.gather(play(message, yt_url))
       else:
         canal_voice2 = message.author.voice.channel.id
         if canal_voice == canal_voice2:
             if not msg.startswith('https://') and not voice.is_playing():
                 await asyncio.gather(embed_musica(message, yt_url))
-            if not msg.startswith('https://youtube.com/playlist'):
-                await asyncio.gather(play(message, yt_url))
-            else:
+            if msg.startswith('https://youtube.com/playlist') or msg.startswith('https://www.youtube.com/playlist'):
                 await asyncio.gather(playlist(message, yt_url))
+            else:
+                await asyncio.gather(play(message, yt_url))
         else:
             await message.channel.send(
                     "I'm already playing in other channel")
