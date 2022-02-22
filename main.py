@@ -7,6 +7,7 @@ from discord import FFmpegPCMAudio, PCMVolumeTransformer
 import re
 import urllib
 from youtube_dl import YoutubeDL
+from pytube import Playlist
 
 players = {}
 COR = 0xF7FE2E
@@ -343,34 +344,29 @@ async def on_message(message):
 
 async def playlist(message, yt_url):
     global name, q
-    count = 0
 
     voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
 
     embed_loading = discord.Embed(description='Carregando Playlist...',
                                   colour=discord.Colour.blue())
     await message.channel.send(embed=embed_loading)
+    
+    p = Playlist(yt_url)
 
-    with YoutubeDL(YDL_OPTIONS) as ydl:
-      info = ydl.extract_info(yt_url, download=False)
-      if 'entries' in info:
-        video = info['entries'][0]
-        try:
-          while video != 0:
-            video = info['entries'][count]
-            video_url = video['webpage_url']
-            video_title = video['title']
+    print(f'Downloading: {p.title}')
 
-            q.append(video_url)
-            name.append(video_title)
+    for url in p.video_urls:
+      q.append(url)
 
-            count = count + 1
+    for url in p.video_urls:
+      name.append(p.title)
 
-        except Exception:
-          await asyncio.gather(embed_track(message, q[0]))
+    await asyncio.gather(embed_track(message, q[0]))
 
-          if queue_bool == 0:
-            await asyncio.gather(queue(message, voice))
+    if queue_bool == 0:
+      await asyncio.gather(queue(message, voice))
+
+
 
 
 async def embed_musica(message, yt_url):
