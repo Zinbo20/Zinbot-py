@@ -350,7 +350,7 @@ async def playlist(message, yt_url):
     embed_loading = discord.Embed(description='Carregando Playlist...',
                                   colour=discord.Colour.blue())
     await message.channel.send(embed=embed_loading)
-    
+
     p = Playlist(yt_url)
 
     print(f'Downloading: {p.title}')
@@ -358,8 +358,8 @@ async def playlist(message, yt_url):
     for url in p.video_urls:
       q.append(url)
 
-    for url in p.video_urls:
-      name.append(p.title)
+    for video in p.videos:
+      name.append(video.title)
 
     await asyncio.gather(embed_track(message, q[0]))
 
