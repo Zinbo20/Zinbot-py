@@ -437,8 +437,6 @@ async def play(message, yt_url):
     else:
       await asyncio.gather(timeout(message, voice))
 
-    #play
-
 
 async def queue(message,voice):
     global q, name, t, queue_bool
