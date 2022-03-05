@@ -174,6 +174,8 @@ async def on_message(message):
     voice = get(client.voice_clients, guild=message.channel.guild)
     t = 1
     voice.stop()
+    if not q:
+      await asyncio.gather(timeout(message, voice))
 
   elif message.content.startswith(Chave + 'pause'):
     voice = get(client.voice_clients, guild=message.channel.guild)
@@ -473,25 +475,26 @@ async def queue(message,voice):
 
     if not q:
         await asyncio.sleep(t)
-        embed_track = discord.Embed(description='There are no more tracks',
+        if not voice.is_playing():
+          embed_track = discord.Embed(description='There are no more tracks',
                                     colour=discord.Colour.red())
-        await message.channel.send(embed=embed_track)
-        t = 1
-        await asyncio.gather(timeout(message, voice))
-        queue_bool = 0
-    elif  voice != None:
+          await message.channel.send(embed=embed_track)
+          t = 1
+          await asyncio.gather(timeout(message, voice))
+          queue_bool = 0
+    elif voice != None:
       await asyncio.gather(queue(message, voice))
 
 async def timeout(message, voice):
     await asyncio.sleep(t)
-    await asyncio.sleep(3 * 60)
+    await asyncio.sleep(5 * 60)
     voice = get(client.voice_clients, guild=message.channel.guild)
     while voice.is_playing() or voice.is_paused() or voice == None:
         break
     else:
         embed_track = discord.Embed(
             description=
-            'No tracks have been playing for the past 3 minutes, leaving :wave:',
+            'No tracks have been playing for the past 5 minutes, leaving :wave:',
             colour=discord.Colour.red())
         await message.channel.send(embed=embed_track)
         await voice.disconnect()
