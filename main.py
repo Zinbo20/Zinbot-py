@@ -174,6 +174,8 @@ async def on_message(message):
     voice = get(client.voice_clients, guild=message.channel.guild)
     t = 1
     voice.stop()
+    if not q:
+      await asyncio.gather(timeout(message, voice))
 
   elif message.content.startswith(Chave + 'pause'):
     voice = get(client.voice_clients, guild=message.channel.guild)
@@ -472,14 +474,16 @@ async def queue(message,voice):
         await message.channel.send(embed=embed_queue)
 
     if not q:
-        await asyncio.sleep(t)
+      await asyncio.sleep(t)
+      if not q:
         embed_track = discord.Embed(description='There are no more tracks',
                                     colour=discord.Colour.red())
         await message.channel.send(embed=embed_track)
         t = 1
         await asyncio.gather(timeout(message, voice))
         queue_bool = 0
-    elif  voice != None:
+        
+    if q and voice != None:
       await asyncio.gather(queue(message, voice))
 
 async def timeout(message, voice):
