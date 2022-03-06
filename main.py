@@ -488,14 +488,14 @@ async def queue(message,voice):
 
 async def timeout(message, voice):
     await asyncio.sleep(t)
-    await asyncio.sleep(3 * 60)
+    await asyncio.sleep(10 * 60)
     voice = get(client.voice_clients, guild=message.channel.guild)
     while voice.is_playing() or voice.is_paused() or voice == None:
         break
     else:
         embed_track = discord.Embed(
             description=
-            'No tracks have been playing for the past 3 minutes, leaving :wave:',
+            'No tracks have been playing for the past 10 minutes, leaving :wave:',
             colour=discord.Colour.red())
         await message.channel.send(embed=embed_track)
         await voice.disconnect()
