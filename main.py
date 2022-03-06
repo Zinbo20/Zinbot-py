@@ -8,6 +8,7 @@ import re
 import urllib
 from youtube_dl import YoutubeDL
 from pytube import Playlist
+import unidecode 
 
 players = {}
 COR = 0xF7FE2E
@@ -225,7 +226,9 @@ async def on_message(message):
         if x == len(attachment.split()):
             break
 
-      msg = attachment.split()[1]
+      outputString = unidecode.unidecode(attachment.split()[1]) 
+
+      msg = outputString
 
       if not msg.startswith('https://'):
 
@@ -277,7 +280,9 @@ async def on_message(message):
         if x == len(attachment.split()):
             break
 
-      msg = attachment.split()[1]
+      outputString = unidecode.unidecode(attachment.split()[1]) 
+
+      msg = outputString
 
       if not msg.startswith('https://'):
 
