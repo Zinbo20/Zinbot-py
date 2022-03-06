@@ -495,6 +495,10 @@ async def queue(message,voice):
 
 async def timeout(message, voice):
     await asyncio.sleep(t)
+  
+    while voice.is_playing() or voice.is_paused() or voice == None:
+        break
+      
     await asyncio.sleep(10 * 60)
     voice = get(client.voice_clients, guild=message.channel.guild)
     while voice.is_playing() or voice.is_paused() or voice == None:
