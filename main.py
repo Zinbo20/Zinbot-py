@@ -226,9 +226,10 @@ async def on_message(message):
         if x == len(attachment.split()):
             break
 
-      outputString = unidecode.unidecode(attachment.split()[1]) 
+      outputString = unidecode.unidecode(search) 
+      search = outputString
 
-      msg = outputString
+      msg = attachment.split()[1]
 
       if not msg.startswith('https://'):
 
@@ -280,9 +281,10 @@ async def on_message(message):
         if x == len(attachment.split()):
             break
 
-      outputString = unidecode.unidecode(attachment.split()[1]) 
+      outputString = unidecode.unidecode(search) 
+      search = outputString
 
-      msg = outputString
+      msg = attachment.split()[1]
 
       if not msg.startswith('https://'):
 
