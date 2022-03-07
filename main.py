@@ -494,7 +494,7 @@ async def queue(message,voice):
       await asyncio.gather(queue(message, voice))
 
 async def timeout(message, voice):
-    await asyncio.sleep(t)
+    await asyncio.sleep(t+5)
   
     while voice.is_playing() or voice.is_paused() or voice == None:
         break
