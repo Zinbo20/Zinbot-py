@@ -493,23 +493,31 @@ async def queue(message,voice):
     if q and voice != None:
       await asyncio.gather(queue(message, voice))
 
+
+
 async def timeout(message, voice):
-    await asyncio.sleep(t+5)
-  
-    while voice.is_playing() or voice.is_paused() or voice == None:
-        break
-      
+  while True:
+    await asyncio.sleep(t+10)
+    
+    voice2 = discord.utils.get(client.voice_clients, guild=message.author.guild)
+    
+    if voice.is_playing() or voice.is_paused() or voice2 == None or q:
+      break
+
     await asyncio.sleep(10 * 60)
-    voice = get(client.voice_clients, guild=message.channel.guild)
-    while voice.is_playing() or voice.is_paused() or voice == None:
-        break
+    
+    voice2 = discord.utils.get(client.voice_clients, guild=message.author.guild)
+    
+    if voice.is_playing() or voice.is_paused() or voice2 == None or q:
+      break
     else:
-        embed_track = discord.Embed(
+      embed_track = discord.Embed(
             description=
             'No tracks have been playing for the past 10 minutes, leaving :wave:',
             colour=discord.Colour.red())
-        await message.channel.send(embed=embed_track)
-        await voice.disconnect()
+      await message.channel.send(embed=embed_track)
+      await voice.disconnect()
+      break
 
 
 client.run(os.getenv('TOKEN'))
