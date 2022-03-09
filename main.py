@@ -504,7 +504,12 @@ async def timeout(message, voice):
     if voice.is_playing() or voice.is_paused() or voice2 == None or q:
       break
 
-    await asyncio.sleep(10 * 60)
+    m=0
+    while True:
+      await asyncio.sleep(30)
+      m += 1
+      if m == 10*2 or voice.is_playing() or voice.is_paused() or voice2 == None or q:
+        break
     
     voice2 = discord.utils.get(client.voice_clients, guild=message.author.guild)
     
