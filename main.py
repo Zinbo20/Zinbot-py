@@ -86,7 +86,7 @@ async def on_message(message):
     embed_help.set_author(name='Zinbot',
                               icon_url='https://i.imgur.com/To6Bkn2.jpg')
     embed_help.add_field(name='General commands',
-                             value='*help*, *ping*.',
+                             value='*help*, *ping*, *feedback*.',
                              inline=False)
     embed_help.add_field(
             name='Music commands',
@@ -134,6 +134,34 @@ async def on_message(message):
   elif message.content.startswith(Chave + 'clear'):
     q.clear()
     name.clear()
+
+  elif message.content.startswith(Chave + 'feedback'):
+    attachment = str(message.content)
+    mensagem = ""
+    
+    x = 1
+    while True:
+      mensagem += attachment.split()[x] + " "
+      x = x + 1
+      if x == len(attachment.split()):
+        break
+
+    #channel = client.get_channel(id)
+    dev = await client.fetch_user(os.getenv('Dev.id'))
+
+    embed_bug = discord.Embed(
+        title='Feedback',
+        description=
+            mensagem,
+            colour=discord.Colour.blue())
+    embed_bug.set_footer(text=message.guild)
+    embed_bug.set_author(name=message.author.display_name,
+                               icon_url=message.author.avatar_url)
+
+    await dev.send(embed=embed_bug)
+
+    embed=discord.Embed(description="Mensagem enviada para o desenvolvedor.", color=discord.Color.blue())
+    await message.channel.send(embed=embed)
 
   elif message.content.startswith(Chave + 'list'):
     global msg,pag,i
@@ -441,9 +469,9 @@ async def play(message, yt_url):
         name.append(v_title)
         await asyncio.gather(embed_track(message, yt_url))
 
-    if (bool2 == 0):
+    if bool2 == 0:
       await asyncio.gather(queue(message, voice))
-    else:
+    elif queue_bool == 0:
       await asyncio.gather(timeout(message, voice))
 
 
