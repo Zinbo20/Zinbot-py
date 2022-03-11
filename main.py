@@ -153,7 +153,7 @@ async def on_message(message):
         title='Feedback',
         description=
             mensagem,
-            colour=discord.Colour.blue())
+            colour=discord.Colour.green())
     embed_bug.set_footer(text=message.guild)
     embed_bug.set_author(name=message.author.display_name,
                                icon_url=message.author.avatar_url)
