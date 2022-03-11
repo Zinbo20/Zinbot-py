@@ -146,10 +146,7 @@ async def on_message(message):
       if x == len(attachment.split()):
         break
 
-    print(message.author.id) 
-    print(os.getenv('Dev.id'))
-
-    dev = await client.fetch_user(463763114182180864)
+    dev = await client.fetch_user(os.getenv('Dev.id'))
 
     embed_bug = discord.Embed(
         title='Feedback',
