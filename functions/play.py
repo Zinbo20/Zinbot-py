@@ -118,73 +118,60 @@ async def comando_play(message,client2):
 
 
 
-
-
-
-
-
-
 async def add(message):
-    global queue, name, canal_voice, canal_voice2
-    msg = ""
-    yt_url = ""
+  global queue, name, canal_voice, canal_voice2
+  msg = ""
+  yt_url = ""
 
-    attachment = str(message.content)
-    search = ""
+  attachment = str(message.content)
+  search = ""
 
-    print("msg=")
-    print(len(attachment.split()))
+  print("msg=")
+  print(len(attachment.split()))
 
-    if(len(attachment.split()) > 1):
-      x = 1
-      while True:
-        msg = attachment.split()[x]
-        search += msg + " "
-        x = x + 1
-        if x == len(attachment.split()):
-            break
+  if(len(attachment.split()) > 1):
+    x = 1
+    while True:
+      msg = attachment.split()[x]
+      search += msg + " "
+      x = x + 1
+      if x == len(attachment.split()):
+        reak
 
-      outputString = unidecode.unidecode(search) 
-      search = outputString
+    outputString = unidecode.unidecode(search) 
+    search = outputString
 
-      msg = attachment.split()[1]
+    msg = attachment.split()[1]
 
-      if not msg.startswith('https://'):
+    if not msg.startswith('https://'):
 
-        search = search.replace(" ", "+")
+      search = search.replace(" ", "+")
 
-        html = urllib.request.urlopen(
+      html = urllib.request.urlopen(
                 "https://www.youtube.com/results?search_query=" + search)
-        video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
+      video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
 
-        yt_url = "https://www.youtube.com/watch?v=" + video_ids[0]
+      yt_url = "https://www.youtube.com/watch?v=" + video_ids[0]
 
-      else:
-        yt_url = attachment.split()[1]
+    else:
+      yt_url = attachment.split()[1]
 
-      with YoutubeDL(YDL_OPTIONS) as ydl:
-        info = ydl.extract_info(yt_url, download=False)
-        v_title = info.get('title', None)
+    with YoutubeDL(YDL_OPTIONS) as ydl:
+      info = ydl.extract_info(yt_url, download=False)
+      v_title = info.get('title', None)
 
-      if not msg.startswith('https://'):
-
-        embed_queue = discord.Embed(title="Added Music " + v_title,
-        url=yt_url,
-        colour=000000)
-        await message.channel.send(embed=embed_queue)
-        queue.append(yt_url)
-        name.append(v_title)
-
-      elif msg.startswith('https://youtube.com/playlist'):
-        await asyncio.gather(playlist.playlist(message,yt_url,client2)
-
-      else:
-        queue.append(yt_url)
-        name.append(v_title)
-
-
-
-
+    if not msg.startswith('https://'):
+      embed_queue = discord.Embed(title="Added Music " + v_title,
+      url=yt_url,
+      colour=000000)
+      await message.channel.send(embed=embed_queue)
+      queue.append(yt_url)
+      name.append(v_title)
+    elif msg.startswith('https://youtube.com/playlist'):
+      await asyncio.gather(playlist.playlist(message,yt_url,client2)
+    else:
+      queue.append(yt_url)
+      name.append(v_title)
 
 
 
