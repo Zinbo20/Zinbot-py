@@ -93,5 +93,5 @@ async def on_message(message):
   elif message.content.startswith(Chave + 'add'):
     await asyncio.gather(play.add(message))
     
-keep_alive()
+
 client.run(os.getenv('TOKEN'))
