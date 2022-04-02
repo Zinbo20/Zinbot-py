@@ -176,7 +176,7 @@ async def add(message):
         name.append(v_title)
 
       elif msg.startswith('https://youtube.com/playlist'):
-        await asyncio.gather(playlist(message, yt_url))
+        await asyncio.gather(playlist.playlist(message,yt_url,client2)
 
       else:
         queue.append(yt_url)

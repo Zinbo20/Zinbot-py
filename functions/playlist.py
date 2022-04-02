@@ -1,36 +1,36 @@
 import discord
 import asyncio
+from pytube import Playlist
 
 client = discord.Client()
 
-async def timeout(message, voice,client2,tempo):
+from functions import embed
+from functions import fun_queue
+from functions import play
 
+async def playlist(message,yt_url,client2):
   client = client2
-  
-  while True:
-    await asyncio.sleep(tempo+10)
-    
-    voice2 = discord.utils.get(client.voice_clients, guild=message.author.guild)
-    
-    if voice.is_playing() or voice.is_paused() or voice2 == None:
-      break
 
-    m=0
-    while True:
-      await asyncio.sleep(30)
-      m += 1
-      if m == 10*2 or voice.is_playing() or voice.is_paused() or voice2 == None:
-        break
+  if play.bool_run == True and len(play.queue) == 0:
+    play.bool_run == False
+
+  voice = discord.utils.get(client.voice_clients, guild=message.author.guild)
+
+  embed_loading = discord.Embed(description='Carregando Playlist...',
+                                  colour=discord.Colour.blue())
+  await message.channel.send(embed=embed_loading)
+
+  p = Playlist(yt_url)
+
+  print(f'Downloading: {p.title}')
+
+  for url in p.video_urls:
+    play.queue.append(url)
+
+  for video in p.videos:
+    play.name.append(video.title)
+
+  await asyncio.gather(embed.embed_track(message,yt_url))
     
-    voice2 = discord.utils.get(client.voice_clients, guild=message.author.guild)
-    
-    if voice.is_playing() or voice.is_paused() or voice2 == None:
-      break
-    else:
-      embed_track = discord.Embed(
-            description=
-            'No tracks have been playing for the past 10 minutes, leaving :wave:',
-            colour=discord.Colour.red())
-      await message.channel.send(embed=embed_track)
-      await voice.disconnect()
-      break
+  if len(play.queue) > 1 and play.bool_run == False:
+    await asyncio.gather(fun_queue.fun_queue(message,voice,client))
