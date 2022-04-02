@@ -4,8 +4,6 @@ import asyncio
 import random
 from discord.utils import get
 
-from keep_alive import keep_alive
-
 client = discord.Client()
 Chave = '*'
 
