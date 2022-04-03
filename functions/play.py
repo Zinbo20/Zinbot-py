@@ -147,7 +147,7 @@ async def play(message, yt_url):
 
 
 async def add(message):
-  global canal_voice, canal_voice2
+  global canal_voice, canal_voice2,queue,name
   msg = ""
   yt_url = ""
 
