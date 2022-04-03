@@ -3,12 +3,12 @@ import asyncio
 
 client = discord.Client()
 
-async def timeout(message, voice,client2,tempo):
+async def timeout(message, voice,client2):
 
   client = client2
   
   while True:
-    await asyncio.sleep(tempo+10)
+    await asyncio.sleep(10)
     
     voice2 = discord.utils.get(client.voice_clients, guild=message.author.guild)
     
@@ -26,6 +26,7 @@ async def timeout(message, voice,client2,tempo):
     
     if voice.is_playing() or voice.is_paused() or voice2 == None:
       break
+      
     else:
       embed_track = discord.Embed(
             description=

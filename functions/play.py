@@ -154,9 +154,6 @@ async def add(message):
   attachment = str(message.content)
   search = ""
 
-  print("msg=")
-  print(len(attachment.split()))
-
   if(len(attachment.split()) > 1):
     x = 1
     while True:
