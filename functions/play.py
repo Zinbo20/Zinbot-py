@@ -143,6 +143,9 @@ async def play(message, yt_url):
 
 
 
+
+
+
 async def add(message):
   global queue, name, canal_voice, canal_voice2
   msg = ""
@@ -200,3 +203,6 @@ async def add(message):
       
     elif msg.startswith('https://youtube.com/playlist'):
       await asyncio.gather(playlist.playlist(message,yt_url,client2)
+
+  else:
+    print("< 1")
