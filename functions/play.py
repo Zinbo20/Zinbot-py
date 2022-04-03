@@ -194,13 +194,13 @@ async def add(message):
       url=yt_url,
       colour=000000)
       await message.channel.send(embed=embed_queue)
-      q.append(yt_url)
+      queue.append(yt_url)
       name.append(v_title)
 
     elif msg.startswith('https://youtube.com/playlist'):
       await asyncio.gather(playlist(message, yt_url))
 
     else:
-      q.append(yt_url)
+      queue.append(yt_url)
       name.append(v_title)
         
