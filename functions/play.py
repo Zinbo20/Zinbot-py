@@ -113,8 +113,33 @@ async def comando_play(message,client2):
       colour=discord.Colour.red())
       await message.channel.send(embed=embed_noq)
 
+async def play(message, yt_url):
+  global queue, name, v_title, client
+  global bool_run
+  
+  if bool_run == True and len(queue) == 0:
+    bool_run == False
+  try:
+    with YoutubeDL(YDL_OPTIONS) as ydl:
+      info = ydl.extract_info(yt_url, download=False)
+      v_title = info.get('title', None)
+  except Exception as e:
+    print('\n')
+    print('1- Exception is')
+    print(e)
+    print('\n')
+  
+  queue.append(yt_url)
+  name.append(v_title)
 
+  voice = get(client.voice_clients, guild=message.channel.guild)
+  
+  if len(queue) >= 1 and bool_run == True:
+    await asyncio.gather(embed.embed_track(message,yt_url))
 
+  if len(queue) >= 1 and bool_run == False:
+    bool_run = True
+    await asyncio.gather(fun_queue.fun_queue(message,voice,client))
 
 
 
@@ -174,43 +199,4 @@ async def add(message):
         name.append(v_title)
       
     elif msg.startswith('https://youtube.com/playlist'):
-      await asyncio.gather(playlist.playlist(message,yt_url,client2) 
-
-
-
-
-
-
-
-
-
-
-
-async def play(message, yt_url):
-  global queue, name, v_title, client
-  global bool_run
-  
-  if bool_run == True and len(queue) == 0:
-    bool_run == False
-  try:
-    with YoutubeDL(YDL_OPTIONS) as ydl:
-      info = ydl.extract_info(yt_url, download=False)
-      v_title = info.get('title', None)
-  except Exception as e:
-    print('\n')
-    print('1- Exception is')
-    print(e)
-    print('\n')
-  
-  queue.append(yt_url)
-  name.append(v_title)
-
-  voice = get(client.voice_clients, guild=message.channel.guild)
-  
-  if len(queue) >= 1 and bool_run == True:
-    await asyncio.gather(embed.embed_track(message,yt_url))
-
-  if len(queue) >= 1 and bool_run == False:
-    bool_run = True
-    await asyncio.gather(fun_queue.fun_queue(message,voice,client))
-
+      await asyncio.gather(playlist.playlist(message,yt_url,client2)
