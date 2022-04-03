@@ -204,5 +204,4 @@ async def add(message):
     elif msg.startswith('https://youtube.com/playlist'):
       await asyncio.gather(playlist.playlist(message,yt_url,client2)
 
-  else:
-    print("< 1")
+  print("< 1")
