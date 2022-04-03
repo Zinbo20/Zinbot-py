@@ -147,7 +147,7 @@ async def play(message, yt_url):
 
 
 async def add(message):
-  global queue, name, canal_voice, canal_voice2
+  global canal_voice, canal_voice2
   msg = ""
   yt_url = ""
 
@@ -164,7 +164,7 @@ async def add(message):
       search += msg + " "
       x = x + 1
       if x == len(attachment.split()):
-        reak
+        break
 
     outputString = unidecode.unidecode(search) 
     search = outputString
@@ -189,19 +189,18 @@ async def add(message):
       v_title = info.get('title', None)
 
     if not msg.startswith('https://'):
+
       embed_queue = discord.Embed(title="Added Music " + v_title,
       url=yt_url,
       colour=000000)
       await message.channel.send(embed=embed_queue)
-      queue.append(yt_url)
+      q.append(yt_url)
       name.append(v_title)
-      
-    elif msg.startswith('https://'):
-      if not msg.startswith('https://youtube.com/playlist'):
-        queue.append(yt_url)
-        name.append(v_title)
-      
-    elif msg.startswith('https://youtube.com/playlist'):
-      await asyncio.gather(playlist.playlist(message,yt_url,client2)
 
-  print("< 1")
+    elif msg.startswith('https://youtube.com/playlist'):
+      await asyncio.gather(playlist(message, yt_url))
+
+    else:
+      q.append(yt_url)
+      name.append(v_title)
+        
