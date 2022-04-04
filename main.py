@@ -4,6 +4,8 @@ import asyncio
 import random
 from discord.utils import get
 
+import sys
+
 client = discord.Client()
 Chave = '*'
 
@@ -32,8 +34,7 @@ async def on_message(message):
     await asyncio.gather(help.help(message))
 
   elif message.content.startswith(Chave + 'restart'):
-    os.system("heroku restart")
-    #os.execv(Procfile,"heroku restart")
+    os.execv(main, sys.argv) 
 
   elif message.content.startswith(Chave + 'list'):
     await asyncio.gather(list.list(message))
