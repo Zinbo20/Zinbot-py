@@ -119,6 +119,7 @@ async def play(message, yt_url):
   
   if bool_run == True and len(queue) == 0:
     bool_run == False
+    
   try:
     with YoutubeDL(YDL_OPTIONS) as ydl:
       info = ydl.extract_info(yt_url, download=False)

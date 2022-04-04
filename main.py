@@ -31,6 +31,9 @@ async def on_message(message):
   if message.content.startswith(Chave + 'help'):
     await asyncio.gather(help.help(message))
 
+  elif message.content.startswith(Chave + 'restart'):
+    os.heroku("heroku restart")
+
   elif message.content.startswith(Chave + 'list'):
     await asyncio.gather(list.list(message))
 
