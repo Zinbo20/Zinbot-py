@@ -7,6 +7,8 @@ from youtube_dl import YoutubeDL
 import asyncio
 import unidecode 
 
+import sys
+
 client = discord.Client()
 
 queue = []
