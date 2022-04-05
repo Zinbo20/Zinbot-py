@@ -34,7 +34,7 @@ async def on_message(message):
     await asyncio.gather(help.help(message))
 
   elif message.content.startswith(Chave + 'restart'):
-    os.execv(main, sys.argv) 
+    sys.exit()
 
   elif message.content.startswith(Chave + 'list'):
     await asyncio.gather(list.list(message))
