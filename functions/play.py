@@ -119,6 +119,8 @@ async def play(message, yt_url):
   global queue, name, v_title, client
   global bool_run
 
+  voice = get(client.voice_clients, guild=message.channel.guild)
+
   if not voice.is_playing():
     if bool_run == True and len(queue) == 0:
       bool_run = False
@@ -138,8 +140,6 @@ async def play(message, yt_url):
   
   queue.append(yt_url)
   name.append(v_title)
-
-  voice = get(client.voice_clients, guild=message.channel.guild)
   
   if len(queue) >= 1 and bool_run == True:
     await asyncio.gather(embed.embed_track(message,yt_url))
