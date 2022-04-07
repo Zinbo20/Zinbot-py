@@ -58,5 +58,5 @@ async def fun_queue(message,voice,client2):
 
   if play.queue and voice != None:
     await asyncio.gather(fun_queue(message,voice,client))
-  else:
-    play.bool_run = False
+  #else:
+  #  play.bool_run = True

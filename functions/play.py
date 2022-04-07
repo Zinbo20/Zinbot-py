@@ -120,7 +120,7 @@ async def play(message, yt_url):
   global bool_run
   
   if bool_run == True and len(queue) == 0:
-    bool_run == False
+    bool_run = False
     
   try:
     with YoutubeDL(YDL_OPTIONS) as ydl:
