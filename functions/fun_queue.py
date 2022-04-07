@@ -38,9 +38,9 @@ async def fun_queue(message,voice,client2):
         print('\n')
 
   if voice.is_playing():
-    embed_queue = discord.Embed(title="Started playing " + play.name.pop(0),
-                                    url=play.queue.pop(0),
-                                    colour=000000)
+    embed_queue = discord.Embed(title="Started playing " +      play.name.pop(0),
+    url=play.queue.pop(0),
+    colour=000000)
     await message.channel.send(embed=embed_queue)
 
   while True:
@@ -52,12 +52,11 @@ async def fun_queue(message,voice,client2):
       break
 
   if not play.queue:
-    embed_track = discord.Embed(description='There are no more tracks',
-                                    colour=discord.Colour.red())
+    embed_track = discord.Embed(description='There are no       more tracks',colour=discord.Colour.red())
     await message.channel.send(embed=embed_track)
     await asyncio.gather(timeout.timeout(message,voice,client))
 
   if play.queue and voice != None:
     await asyncio.gather(fun_queue(message,voice,client))
   else:
-    play.bool_run = True
+    play.bool_run = False
