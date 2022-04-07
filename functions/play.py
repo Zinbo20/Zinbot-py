@@ -118,9 +118,10 @@ async def comando_play(message,client2):
 async def play(message, yt_url):
   global queue, name, v_title, client
   global bool_run
-  
-  if bool_run == True and len(queue) == 0:
-    bool_run = False
+
+  if not voice.is_playing():
+    if bool_run == True and len(queue) == 0:
+      bool_run = False
     
   try:
     with YoutubeDL(YDL_OPTIONS) as ydl:
