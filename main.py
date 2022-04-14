@@ -4,6 +4,8 @@ import asyncio
 import random
 from discord.utils import get
 
+from urllib.error import ContentTooShortError
+
 import sys
 
 client = discord.Client()
@@ -42,7 +44,7 @@ async def on_message(message):
   elif message.content.startswith(Chave + 'play'):
     try:
       await asyncio.gather(play.comando_play(message,client))
-    except Exception as e:
+    except ContentTooShortError as e:
       print('\n')
       print('all play Exception is')
       print(e)
