@@ -19,6 +19,19 @@ canal_voice2 = 0
 
 bool_run = False
 
+
+class VoiceError(Exception):
+  print("Print on Play VoiceError Exception: ")
+  print(Exception)
+  pass
+
+
+class YTDLError(Exception):
+  print("print on Play YTDLError Exception: ")
+  print(Exception)
+  pass
+  
+
 YDL_OPTIONS = {'cookiefile': 'cookies.txt','format': 'bestaudio', 'noplaylist': 'True'}
 
 FFMPEG_OPTIONS = {'before_options':'-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-vn'
