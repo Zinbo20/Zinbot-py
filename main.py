@@ -10,6 +10,17 @@ import sys
 
 client = discord.Client()
 Chave = '*'
+
+class VoiceError(Exception):
+  print("Print on Main VoiceError Exception: ")
+  print(Exception)
+  pass
+
+
+class YTDLError(Exception):
+  print("print on Main YTDLError Exception: ")
+  print(Exception)
+  pass
   
 
 @client.event
