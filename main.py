@@ -18,7 +18,7 @@ class VoiceError(Exception):
 
 
 class YTDLError(Exception):
-  print("print on Main YTDLError Exception: ")
+  print("Print on Main YTDLError Exception: ")
   print(Exception)
   pass
   
