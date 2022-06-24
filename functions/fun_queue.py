@@ -4,23 +4,25 @@ import asyncio
 from discord import FFmpegPCMAudio
 from youtube_dl import YoutubeDL
 
-client = discord.Client()
+client = discord.Client()  
+
+#YDL_OPTIONS = {'cookiefile': 'cookies.txt','format': 'bestaudio', 'noplaylist': 'True'}
 
 
-class VoiceError(Exception):
-  print("Print on Queue VoiceError Exception: ")
-  print(Exception)
-  pass
-
-
-class YTDLError(Exception):
-  print("print on Queue YTDLError Exception: ")
-  print(Exception)
-  pass
-
-  
-
-YDL_OPTIONS = {'cookiefile': 'cookies.txt','format': 'bestaudio', 'noplaylist': 'True'}
+YDL_OPTIONS = {'cookiefile': 'cookies.txt',        'format': 'bestaudio/best',
+        'extractaudio': True,
+        'audioformat': 'mp3',
+        'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
+        'restrictfilenames': True,
+        'noplaylist': True,
+        'nocheckcertificate': True,
+        'ignoreerrors': False,
+        'logtostderr': False,
+        'quiet': True,
+        'no_warnings': True,
+        'default_search': 'auto',
+        'source_address': '0.0.0.0',
+    }
 
 FFMPEG_OPTIONS = {'before_options':'-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-vn'
 }
