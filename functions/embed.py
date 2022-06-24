@@ -6,9 +6,6 @@ client = discord.Client()
 
 YDL_OPTIONS = {'cookiefile': 'cookies.txt','format': 'bestaudio', 'noplaylist': 'True'}
 
-FFMPEG_OPTIONS = {'before_options':'-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-vn'
-}
-
 from functions import play
 
 async def embed_musica(message, yt_url):
