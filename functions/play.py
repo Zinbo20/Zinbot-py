@@ -143,14 +143,14 @@ async def play(message, yt_url):
   try:
     with YoutubeDL(YDL_OPTIONS) as ydl:
       info = ydl.extract_info(yt_url, download=False)
-      v_title = info.get('title', None)
+      #v_title = info.get('title', None)
   except Exception as e:
     print('\n')
     print('1- Exception is')
     print(e)
     print('\n')
     #if(e == "ERROR: No video formats found"):
-    if(e == "'NoneType' object has no attribute 'get'"):
+    if(e == "object has no attribute 'get'"):
       await message.channel.send("Ops! Ocorreu um erro. Vou reiniciar... Espere 1m e tente Novamente.")
       sys.exit()
   
