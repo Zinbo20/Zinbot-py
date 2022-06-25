@@ -43,7 +43,7 @@ async def fun_queue(message,voice,client2):
       try:
         with YoutubeDL(YDL_OPTIONS) as ydl:
           info = ydl.extract_info(play.queue[0], download=False)
-          #tempo = info.get("duration", None)
+          tempo = info.get("duration", None)
           URL = info['formats'][0]['url']
           voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
           voice.is_playing()

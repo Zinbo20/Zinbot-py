@@ -143,7 +143,7 @@ async def play(message, yt_url):
   try:
     with YoutubeDL(YDL_OPTIONS) as ydl:
       info = ydl.extract_info(yt_url, download=False)
-      #v_title = info.get('title', None)
+      v_title = info.get('title', None)
   except Exception as e:
     print('\n')
     print('1- Exception is')
