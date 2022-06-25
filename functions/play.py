@@ -149,7 +149,8 @@ async def play(message, yt_url):
     print('1- Exception is')
     print(e)
     print('\n')
-    if(e == "ERROR: No video formats found"):
+    #if(e == "ERROR: No video formats found"):
+    if(e == "'NoneType' object has no attribute 'get'"):
       await message.channel.send("Ops! Ocorreu um erro. Vou reiniciar... Espere 1m e tente Novamente.")
       sys.exit()
   
